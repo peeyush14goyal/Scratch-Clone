@@ -16,6 +16,8 @@ export default function Sidebar() {
     timer_message: "",
     scale: 1,
     curr_size: 1,
+    wait: 0,
+    repeat: 10,
   });
 
   /* Motion Functions */
@@ -287,7 +289,7 @@ export default function Sidebar() {
           />
         </div>
         <div
-          className="flex flex-row flex-wrap bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          className="text-center bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
           onClick={() => changeSize("sprite1")}
         >
           Scale By {state.scale}
@@ -296,6 +298,72 @@ export default function Sidebar() {
 
       {/* Control */}
       <div className="font-bold"> {"Control"} </div>
+      <div className="bg-red-400 p-2 my-3">
+        <div className="grid grid-cols-2 my-2">
+          <text className="text-white">Wait:</text>
+          <input
+            className="mx-2 p-1 py-0 text-center"
+            type="number"
+            value={state.wait}
+            onChange={(e) =>
+              setState({ ...state, wait: parseInt(e.target.value) })
+            }
+          />
+        </div>
+        <div
+          className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          onClick={() => changeSize("sprite1")}
+        >
+          Wait {state.wait} seconds
+        </div>
+      </div>
+
+      <div className="bg-red-400 p-2 my-3">
+        <div className="grid grid-cols-2 my-2">
+          <text className="text-white">Repeat:</text>
+          <input
+            className="mx-2 p-1 py-0 text-center"
+            type="number"
+            value={state.repeat}
+            onChange={(e) =>
+              setState({ ...state, repeat: parseInt(e.target.value) })
+            }
+          />
+        </div>
+        <div
+          className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          onClick={() => changeSize("sprite1")}
+        >
+          Repeat By {state.repeat}
+        </div>
+      </div>
+      <div
+        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-1/2 mx-auto"
+        onClick={() => changeSize("sprite1")}
+      >
+        if
+      </div>
+
+      <div
+        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-1/2 mx-auto"
+        onClick={() => changeSize("sprite1")}
+      >
+        else
+      </div>
+
+      <div
+        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-1/2 mx-auto"
+        onClick={() => changeSize("sprite1")}
+      >
+        forever
+      </div>
+
+      <div
+        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-10/12 mx-auto"
+        onClick={() => changeSize("sprite1")}
+      >
+        when I start as a clone
+      </div>
     </div>
   );
 }
