@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Icon from "./Icon";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import Move from "../components/motion/components/move";
+import TurnAntiClockWise from "./motion/components/turnAntiClockwise";
 
 export default function Sidebar() {
   const [state, setState] = useState({
@@ -22,18 +24,6 @@ export default function Sidebar() {
   });
 
   /* Motion Functions */
-
-  // To move by x and y amount
-  const moveByXY = (id, x, y) => {
-    const el = document.getElementById(id);
-    var viewportOffset = el.getBoundingClientRect();
-    var top = viewportOffset.top + window.scrollY;
-    var left = viewportOffset.left + window.scrollX;
-    el.style.position = "absolute";
-    el.style.left = left + x + "px";
-    el.style.top = top + y + "px";
-    setState({ ...state, curr_x: left + x, curr_y: top + y });
-  };
 
   // To rotate Sprint by an angle
   const rotate = (id, clock) => {
@@ -153,12 +143,7 @@ export default function Sidebar() {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <div
-                      className="bg-blue-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto"
-                      onClick={() => moveByXY("sprite1", 10, 0)}
-                    >
-                      Move 10 steps
-                    </div>
+                    <Move />
                   </li>
                 )}
               </Draggable>
@@ -169,39 +154,7 @@ export default function Sidebar() {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <div className="bg-blue-500 p-2 my-3">
-                      <div className="grid grid-cols-2">
-                        <div className="text-white">Rotate By:</div>
-                        <input
-                          className="mx-2 p-1 py-0 text-center"
-                          type="number"
-                          value={state.anticlockwise_rotation_angle}
-                          onChange={(e) =>
-                            parseInt(e.target.value) > 0 &&
-                            setState({
-                              ...state,
-                              anticlockwise_rotation_angle: parseInt(
-                                e.target.value
-                              ),
-                            })
-                          }
-                        />
-                      </div>
-                      <div
-                        className="flex bg-blue-700 text-white px-2 py-1 mt-3 mb-1 text-sm cursor-pointer text-center"
-                        onClick={() => rotate("sprite1", false)}
-                      >
-                        <div className="flex mx-auto">
-                          Turn
-                          <Icon
-                            name="undo"
-                            size={15}
-                            className="text-white mx-2"
-                          />{" "}
-                          {state.anticlockwise_rotation_angle} degrees
-                        </div>
-                      </div>
-                    </div>
+                    <TurnAntiClockWise />
                   </li>
                 )}
               </Draggable>
