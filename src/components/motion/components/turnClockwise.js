@@ -1,8 +1,22 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { setCharacterAngle } from "../../../redux/character/actions";
 import Icon from "../../Icon";
 
-const TurnClockWise = () => {
+const TurnClockWise = ({ character, characterAngle }) => {
   const [angle, setAngle] = useState(0);
+
+  const handleClick = () => {
+    const el = document.getElementById(character.active);
+    const character_angle = character.characters.find(
+      (x) => x.id === character.active
+    );
+    if (character_angle) {
+      el.style.transform = `rotate(${character_angle.angle + angle}deg)`;
+      characterAngle(character_angle.angle + angle);
+    }
+  };
+
   return (
     <div className="bg-blue-500 p-2 my-3">
       <div className="grid grid-cols-2">
@@ -16,7 +30,7 @@ const TurnClockWise = () => {
       </div>
       <div
         className="flex bg-blue-700 text-white px-2 py-1 mt-3 mb-1 text-sm cursor-pointer text-center"
-        onClick={() => handleClick}
+        onClick={() => handleClick()}
       >
         <div className="flex mx-auto">
           Turn
@@ -28,4 +42,17 @@ const TurnClockWise = () => {
   );
 };
 
-export default TurnClockWise;
+// mapping state to props
+const mapStateToProps = (state) => {
+  return {
+    character: state.character,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    characterAngle: (angle) => dispatch(setCharacterAngle(angle)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TurnClockWise);

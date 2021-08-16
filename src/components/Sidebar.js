@@ -3,6 +3,8 @@ import Icon from "./Icon";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Move from "../components/motion/components/move";
 import TurnAntiClockWise from "./motion/components/turnAntiClockwise";
+import TurnClockWise from "./motion/components/turnClockwise";
+import { motionComponents } from "./motion/list";
 
 export default function Sidebar() {
   const [state, setState] = useState({
@@ -24,16 +26,6 @@ export default function Sidebar() {
   });
 
   /* Motion Functions */
-
-  // To rotate Sprint by an angle
-  const rotate = (id, clock) => {
-    const angle = clock
-      ? state.clockwise_rotation_angle
-      : -1 * state.anticlockwise_rotation_angle;
-    const el = document.getElementById(id);
-    el.style.transform = `rotate(${state.curr_angle + angle}deg)`;
-    setState({ ...state, curr_angle: (state.curr_angle + angle) % 360 });
-  };
 
   // Goto specified x and y
   const gotoXY = (id, x, y) => {
@@ -155,6 +147,17 @@ export default function Sidebar() {
                     {...provided.dragHandleProps}
                   >
                     <TurnAntiClockWise />
+                  </li>
+                )}
+              </Draggable>
+              <Draggable key="3" draggableId="3" index={3}>
+                {(provided) => (
+                  <li
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <TurnClockWise />
                   </li>
                 )}
               </Draggable>
