@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Icon from "./Icon";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 export default function Sidebar() {
   const [state, setState] = useState({
@@ -102,268 +103,112 @@ export default function Sidebar() {
     <div className="w-60 flex-none h-full overflow-y-auto flex flex-col items-start p-2 border-r border-gray-200">
       {/* Events */}
       <div className="font-bold"> {"Events"} </div>
-      <div className="flex flex-row flex-wrap bg-yellow-500 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto">
-        {"When "}
-        <Icon name="flag" size={15} className="text-green-600 mx-2" />
-        {"clicked"}
-      </div>
-      <div className="flex flex-row flex-wrap bg-yellow-500 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto">
-        {"When this sprite clicked"}
-      </div>
+      <DragDropContext>
+        <Droppable droppableId="sidebar__events">
+          {(provided) => (
+            <ul
+              className="sidebar__events"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              <Draggable key="1" draggableId="1" index={1}>
+                {(provided) => (
+                  <li
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <div className="flex flex-row flex-wrap bg-yellow-500 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto">
+                      {"When "}
+                      <Icon
+                        name="flag"
+                        size={15}
+                        className="text-green-600 mx-2"
+                      />
+                      {"clicked"}
+                    </div>
+                  </li>
+                )}
+              </Draggable>
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
 
       {/* Motion */}
       <div className="font-bold"> {"Motion"} </div>
-      <div
-        className="bg-blue-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto"
-        onClick={() => moveByXY("sprite1", 10, 0)}
-      >
-        Move 10 steps
-      </div>
 
-      <div className="bg-blue-500 p-2 my-3">
-        <div className="grid grid-cols-2">
-          <text className="text-white">Rotate By:</text>
-          <input
-            className="mx-2 p-1 py-0 text-center"
-            type="number"
-            value={state.anticlockwise_rotation_angle}
-            onChange={(e) =>
-              parseInt(e.target.value) > 0 &&
-              setState({
-                ...state,
-                anticlockwise_rotation_angle: parseInt(e.target.value),
-              })
-            }
-          />
-        </div>
-        <div
-          className="flex bg-blue-700 text-white px-2 py-1 mt-3 mb-1 text-sm cursor-pointer text-center"
-          onClick={() => rotate("sprite1", false)}
-        >
-          <div className="flex mx-auto">
-            Turn
-            <Icon name="undo" size={15} className="text-white mx-2" />{" "}
-            {state.anticlockwise_rotation_angle} degrees
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-blue-500 p-2 my-3">
-        <div className="grid grid-cols-2">
-          <text className="text-white">Rotate By:</text>
-          <input
-            className="mx-2 p-1 py-0 text-center"
-            type="number"
-            value={state.clockwise_rotation_angle}
-            onChange={(e) => {
-              parseInt(e.target.value) > 0 &&
-                setState({
-                  ...state,
-                  clockwise_rotation_angle: parseInt(e.target.value),
-                });
-            }}
-          />
-        </div>
-        <div
-          className="flex bg-blue-700 text-white px-2 py-1 mt-3 mb-1 text-sm cursor-pointer"
-          onClick={() => rotate("sprite1", true)}
-        >
-          <div className="flex mx-auto">
-            Turn
-            <Icon name="redo" size={15} className="text-white mx-2" />
-            {state.clockwise_rotation_angle} degrees
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-blue-500 p-2 my-3">
-        <div className="grid grid-cols-2 my-2">
-          <text className="text-white"> X:</text>
-          <input
-            className="mx-2 p-1 py-0 text-center"
-            type="number"
-            value={state.goto_x}
-            onChange={(e) => {
-              parseInt(e.target.value) != 0 &&
-                setState({ ...state, goto_x: parseInt(e.target.value) });
-            }}
-          />
-        </div>
-        <div className="grid grid-cols-2 my-2">
-          <text className="text-white">Y:</text>
-          <input
-            className="mx-2 p-1 py-0 text-center"
-            type="number"
-            value={state.goto_y}
-            onChange={(e) => {
-              parseInt(e.target.value) != 0 &&
-                setState({ ...state, goto_y: parseInt(e.target.value) });
-            }}
-          />
-        </div>
-        <div
-          className="text-center bg-blue-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
-          onClick={() => gotoXY("sprite1", state.goto_x, state.goto_y)}
-        >
-          goto X: {state.goto_x} Y: {state.goto_y}
-        </div>
-      </div>
-
-      {/* Looks */}
-      <div className="font-bold"> {"Looks"} </div>
-      <div className="bg-purple-500 p-2 my-3">
-        <div className="grid grid-cols-2 my-2">
-          <text className="text-white">Message</text>
-          <input
-            className="mx-2 p-1 py-0 text-center"
-            type="text"
-            value={state.timer_message}
-            onChange={(e) => {
-              e.target.value.length > 0 &&
-                setState({ ...state, timer_message: e.target.value });
-            }}
-          />
-        </div>
-        <div className="grid grid-cols-2 my-2">
-          <text className="text-white">Timer:</text>
-          <input
-            className="mx-2 p-1 py-0 text-center"
-            type="number"
-            value={state.timer_for_msg}
-            onChange={(e) => {
-              parseInt(e.target.value) > 0 &&
-                setState({ ...state, timer_for_msg: parseInt(e.target.value) });
-            }}
-          />
-        </div>
-        <div
-          className="flex flex-row flex-wrap bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
-          onClick={() => displayMessage(true)}
-        >
-          {`say ${state.timer_message}`}
-        </div>
-      </div>
-
-      <div className="bg-purple-500 p-2 my-3">
-        <div className="grid grid-cols-2 my-2">
-          <text className="text-white">Message</text>
-          <input
-            className="mx-2 p-1 py-0 text-center"
-            type="text"
-            value={state.message}
-            onChange={(e) => {
-              e.target.value.length > 0 &&
-                setState({ ...state, message: e.target.value });
-            }}
-          />
-        </div>
-        <div
-          className="flex flex-row flex-wrap bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
-          onClick={() => displayMessage(false)}
-        >
-          {`say ${state.message}`}
-        </div>
-      </div>
-      <div
-        className="text-center bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto w-1/2"
-        onClick={() => handleDisplay(true)}
-      >
-        Show
-      </div>
-      <div
-        className="text-center bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto w-1/2"
-        onClick={() => handleDisplay(false)}
-      >
-        Hide
-      </div>
-      <div className="bg-purple-500 p-2 my-3">
-        <div className="grid grid-cols-2 my-2">
-          <text className="text-white">Size:</text>
-          <input
-            className="mx-2 p-1 py-0 text-center"
-            type="number"
-            value={state.scale}
-            onChange={(e) =>
-              setState({ ...state, scale: parseInt(e.target.value) })
-            }
-          />
-        </div>
-        <div
-          className="text-center bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
-          onClick={() => changeSize("sprite1")}
-        >
-          Scale By {state.scale}
-        </div>
-      </div>
-
-      {/* Control */}
-      <div className="font-bold"> {"Control"} </div>
-      <div className="bg-red-400 p-2 my-3">
-        <div className="grid grid-cols-2 my-2">
-          <text className="text-white">Wait:</text>
-          <input
-            className="mx-2 p-1 py-0 text-center"
-            type="number"
-            value={state.wait}
-            onChange={(e) =>
-              setState({ ...state, wait: parseInt(e.target.value) })
-            }
-          />
-        </div>
-        <div
-          className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer"
-          onClick={() => changeSize("sprite1")}
-        >
-          Wait {state.wait} seconds
-        </div>
-      </div>
-
-      <div className="bg-red-400 p-2 my-3">
-        <div className="grid grid-cols-2 my-2">
-          <text className="text-white">Repeat:</text>
-          <input
-            className="mx-2 p-1 py-0 text-center"
-            type="number"
-            value={state.repeat}
-            onChange={(e) =>
-              setState({ ...state, repeat: parseInt(e.target.value) })
-            }
-          />
-        </div>
-        <div
-          className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer"
-          onClick={() => changeSize("sprite1")}
-        >
-          Repeat By {state.repeat}
-        </div>
-      </div>
-      <div
-        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-1/2 mx-auto"
-        onClick={() => changeSize("sprite1")}
-      >
-        if
-      </div>
-
-      <div
-        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-1/2 mx-auto"
-        onClick={() => changeSize("sprite1")}
-      >
-        else
-      </div>
-
-      <div
-        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-1/2 mx-auto"
-        onClick={() => changeSize("sprite1")}
-      >
-        forever
-      </div>
-
-      <div
-        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-10/12 mx-auto"
-        onClick={() => changeSize("sprite1")}
-      >
-        when I start as a clone
-      </div>
+      <DragDropContext>
+        <Droppable droppableId="sidebar__motion">
+          {(provided) => (
+            <ul
+              className="sidebar__events"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              <Draggable key="1" draggableId="1" index={1}>
+                {(provided) => (
+                  <li
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <div
+                      className="bg-blue-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto"
+                      onClick={() => moveByXY("sprite1", 10, 0)}
+                    >
+                      Move 10 steps
+                    </div>
+                  </li>
+                )}
+              </Draggable>
+              <Draggable key="2" draggableId="2" index={2}>
+                {(provided) => (
+                  <li
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <div className="bg-blue-500 p-2 my-3">
+                      <div className="grid grid-cols-2">
+                        <div className="text-white">Rotate By:</div>
+                        <input
+                          className="mx-2 p-1 py-0 text-center"
+                          type="number"
+                          value={state.anticlockwise_rotation_angle}
+                          onChange={(e) =>
+                            parseInt(e.target.value) > 0 &&
+                            setState({
+                              ...state,
+                              anticlockwise_rotation_angle: parseInt(
+                                e.target.value
+                              ),
+                            })
+                          }
+                        />
+                      </div>
+                      <div
+                        className="flex bg-blue-700 text-white px-2 py-1 mt-3 mb-1 text-sm cursor-pointer text-center"
+                        onClick={() => rotate("sprite1", false)}
+                      >
+                        <div className="flex mx-auto">
+                          Turn
+                          <Icon
+                            name="undo"
+                            size={15}
+                            className="text-white mx-2"
+                          />{" "}
+                          {state.anticlockwise_rotation_angle} degrees
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                )}
+              </Draggable>
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 }

@@ -1,14 +1,21 @@
 import React from "react";
 import { ItemTypes } from "../constants";
-import { useDrop } from "react-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 export default function MidArea() {
-  const [props, drop] = useDrop(() => ({
-    accept: ItemTypes.MOTION_ACTION,
-    drop: (monitor) => console.log(props),
-  }));
   return (
-    <div ref={drop} className="flex-1 h-full overflow-auto">
+    <div className="flex-1 h-full overflow-auto">
+      <DragDropContext>
+        <Droppable droppableId="mid-area">
+          {(provided) => {
+            <ul
+              className="mid-area"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            ></ul>;
+          }}
+        </Droppable>
+      </DragDropContext>
       {"mid area"}
     </div>
   );
