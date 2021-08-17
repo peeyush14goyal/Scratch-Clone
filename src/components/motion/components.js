@@ -1,78 +1,22 @@
 import React from "react";
+import Move from "../motion/components/move";
+import TurnAntiClockwise from "./components/turnAntiClockwise";
+import TurnClockwise from "./components/turnClockwise";
 
-export const MoveStepsComponent = (handleClick) => {
-  return (
-    <div
-      className="bg-blue-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto"
-      onClick={() => handleClick}
-    >
-      Move <input type="number" /> steps
-    </div>
-  );
-};
+export const getComponent = (key) => {
+  switch (key) {
+    case "MOVE":
+      return <Move />;
 
-export const TurnClockWise = (handleClick) => {
-  return (
-    <div className="bg-blue-500 p-2 my-3">
-      <div className="grid grid-cols-2">
-        <text className="text-white">Rotate By:</text>
-        <input
-          className="mx-2 p-1 py-0 text-center"
-          type="number"
-          value={state.anticlockwise_rotation_angle}
-          onChange={(e) =>
-            parseInt(e.target.value) > 0 &&
-            setState({
-              ...state,
-              anticlockwise_rotation_angle: parseInt(e.target.value),
-            })
-          }
-        />
-      </div>
-      <div
-        className="flex bg-blue-700 text-white px-2 py-1 mt-3 mb-1 text-sm cursor-pointer text-center"
-        onClick={() => handleClick}
-      >
-        <div className="flex mx-auto">
-          Turn
-          <Icon name="undo" size={15} className="text-white mx-2" />{" "}
-          {state.anticlockwise_rotation_angle} degrees
-        </div>
-      </div>
-    </div>
-  );
-};
+    case "TURN_CLOCKWISE":
+      return <TurnClockwise />;
 
-export const TurnAntiClockWise = (handleClick) => {
-  return (
-    <div className="bg-blue-500 p-2 my-3">
-      <div className="grid grid-cols-2">
-        <text className="text-white">Rotate By:</text>
-        <input
-          className="mx-2 p-1 py-0 text-center"
-          type="number"
-          value={state.clockwise_rotation_angle}
-          onChange={(e) => {
-            parseInt(e.target.value) > 0 &&
-              setState({
-                ...state,
-                clockwise_rotation_angle: parseInt(e.target.value),
-              });
-          }}
-        />
-      </div>
-      <div
-        className="flex bg-blue-700 text-white px-2 py-1 mt-3 mb-1 text-sm cursor-pointer"
-        onClick={() => handleClick}
-      >
-        <div className="flex mx-auto">
-          Turn
-          <Icon name="redo" size={15} className="text-white mx-2" />
-          {state.clockwise_rotation_angle} degrees
-        </div>
-      </div>
-    </div>
-  );
+    case "TURN_ANTI_CLOCKWISE":
+      return <TurnAntiClockwise />;
+
+    default:
+      return React.null;
+  }
 };
 
 export const GotoPosition = (handleClick) => {

@@ -4,7 +4,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import Move from "../components/motion/components/move";
 import TurnAntiClockWise from "./motion/components/turnAntiClockwise";
 import TurnClockWise from "./motion/components/turnClockwise";
-import { motionComponents } from "./motion/list";
+import { getComponent } from "./motion/components";
 
 export default function Sidebar() {
   const [state, setState] = useState({
@@ -23,6 +23,7 @@ export default function Sidebar() {
     curr_size: 1,
     wait: 0,
     repeat: 10,
+    motionComponents: ["MOVE", "TURN_CLOCKWISE", "TURN_ANTI_CLOCKWISE"],
   });
 
   /* Motion Functions */
@@ -128,39 +129,25 @@ export default function Sidebar() {
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              <Draggable key="1" draggableId="1" index={1}>
-                {(provided) => (
-                  <li
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
+              {state.motionComponents.map((x, i) => {
+                return (
+                  <Draggable
+                    key={`motionComp${i}`}
+                    draggableId={`motionComp${i}`}
+                    index={i}
                   >
-                    <Move />
-                  </li>
-                )}
-              </Draggable>
-              <Draggable key="2" draggableId="2" index={2}>
-                {(provided) => (
-                  <li
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <TurnAntiClockWise />
-                  </li>
-                )}
-              </Draggable>
-              <Draggable key="3" draggableId="3" index={3}>
-                {(provided) => (
-                  <li
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <TurnClockWise />
-                  </li>
-                )}
-              </Draggable>
+                    {(provided) => (
+                      <li
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        {getComponent(x)}
+                      </li>
+                    )}
+                  </Draggable>
+                );
+              })}
             </ul>
           )}
         </Droppable>
