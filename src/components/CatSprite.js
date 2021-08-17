@@ -1,9 +1,10 @@
 import React from "react";
 import "./CatSprite.css";
 
-export default function CatSprite() {
+export default function CatSprite({ charac_id }) {
+  console.log("id is ", charac_id);
   return (
-    <div id="sprite1" className="character inline-block">
+    <div id={charac_id} className="character inline-block z-0">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="95.17898101806641"
