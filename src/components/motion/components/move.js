@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 // Move Component for Sidebar
-const Move = ({ character }) => {
+const Move = ({ character, comp_id }) => {
   const [steps, setSteps] = useState(0);
 
   // Fucntion used for moiving Sprint
@@ -17,7 +17,8 @@ const Move = ({ character }) => {
 
   return (
     <div
-      className="bg-blue-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto"
+      id={comp_id}
+      className={` bg-blue-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto`}
       onClick={() => handleClick()}
     >
       Move{" "}

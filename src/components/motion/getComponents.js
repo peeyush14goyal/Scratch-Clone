@@ -3,16 +3,16 @@ import Move from "./components/move";
 import TurnAntiClockwise from "./components/turnAntiClockwise";
 import TurnClockwise from "./components/turnClockwise";
 
-export const getComponent = (key) => {
+export const getComponent = (key, id) => {
   switch (key) {
     case "MOVE":
-      return <Move />;
+      return <Move comp_id={id} />;
 
     case "TURN_CLOCKWISE":
-      return <TurnClockwise />;
+      return <TurnClockwise comp_id={id} />;
 
     case "TURN_ANTI_CLOCKWISE":
-      return <TurnAntiClockwise />;
+      return <TurnAntiClockwise comp_id={id} />;
 
     default:
       return React.null;

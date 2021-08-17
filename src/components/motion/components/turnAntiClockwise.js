@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { setCharacterAngle } from "../../../redux/character/actions";
 import Icon from "../../Icon";
 
-const TurnAntiClockWise = ({ character, characterAngle }) => {
+const TurnAntiClockWise = ({ character, characterAngle, comp_id }) => {
   const [angle, setAngle] = useState(0);
 
   const handleClick = () => {
@@ -32,7 +32,8 @@ const TurnAntiClockWise = ({ character, characterAngle }) => {
         />
       </div>
       <div
-        className="flex bg-blue-700 text-white px-2 py-1 mt-3 mb-1 text-sm cursor-pointer"
+        id={comp_id}
+        className={`flex bg-blue-700 text-white px-2 py-1 mt-3 mb-1 text-sm cursor-pointer`}
         onClick={() => handleClick()}
       >
         <div className="flex mx-auto">
