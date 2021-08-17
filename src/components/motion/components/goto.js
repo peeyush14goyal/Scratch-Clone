@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { connect } from "react-redux";
 
 const GotoXY = () => {
@@ -9,7 +9,20 @@ const GotoXY = () => {
     el.style.top = y + "px";
     setState({ ...state, curr_x: x, curr_y: y });
   };
-  return <div></div>;
+  return (
+    <div className="grid grid-cols-2 my-2">
+      <div className="text-white">Y:</div>
+      <input
+        className="mx-2 p-1 py-0 text-center"
+        type="number"
+        value={state.goto_y}
+        onChange={(e) => {
+          parseInt(e.target.value) != 0 &&
+            setState({ ...state, goto_y: parseInt(e.target.value) });
+        }}
+      />
+    </div>
+  );
 };
 
 // mapping state to props

@@ -119,6 +119,183 @@ export default function Sidebar() {
           </ul>
         )}
       </Droppable>
+
+      <div className="grid grid-cols-2 my-2">
+          <div className="text-white">Y:</div>
+          <input
+            className="mx-2 p-1 py-0 text-center"
+            type="number"
+            value={state.goto_y}
+            onChange={(e) => {
+              parseInt(e.target.value) != 0 &&
+                setState({ ...state, goto_y: parseInt(e.target.value) });
+            }}
+          />
+        </div>
+        <div
+          className="text-center bg-blue-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          onClick={() => gotoXY("sprite1", state.goto_x, state.goto_y)}
+        >
+          goto X: {state.goto_x} Y: {state.goto_y}
+        </div>
+      </div>
+
+      {/* Looks */}
+      <div className="font-bold"> {"Looks"} </div>
+      <div className="bg-purple-500 p-2 my-3">
+        <div className="grid grid-cols-2 my-2">
+          <text className="text-white">Message</text>
+          <input
+            className="mx-2 p-1 py-0 text-center"
+            type="text"
+            value={state.timer_message}
+            onChange={(e) => {
+              e.target.value.length > 0 &&
+                setState({ ...state, timer_message: e.target.value });
+            }}
+          />
+        </div>
+        <div className="grid grid-cols-2 my-2">
+          <text className="text-white">Timer:</text>
+          <input
+            className="mx-2 p-1 py-0 text-center"
+            type="number"
+            value={state.timer_for_msg}
+            onChange={(e) => {
+              parseInt(e.target.value) > 0 &&
+                setState({ ...state, timer_for_msg: parseInt(e.target.value) });
+            }}
+          />
+        </div>
+        <div
+          className="flex flex-row flex-wrap bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          onClick={() => displayMessage(true)}
+        >
+          {`say ${state.timer_message}`}
+        </div>
+      </div>
+
+      <div className="bg-purple-500 p-2 my-3">
+        <div className="grid grid-cols-2 my-2">
+          <text className="text-white">Message</text>
+          <input
+            className="mx-2 p-1 py-0 text-center"
+            type="text"
+            value={state.message}
+            onChange={(e) => {
+              e.target.value.length > 0 &&
+                setState({ ...state, message: e.target.value });
+            }}
+          />
+        </div>
+        <div
+          className="flex flex-row flex-wrap bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          onClick={() => displayMessage(false)}
+        >
+          {`say ${state.message}`}
+        </div>
+      </div>
+      <div
+        className="text-center bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto w-1/2"
+        onClick={() => handleDisplay(true)}
+      >
+        Show
+      </div>
+      <div
+        className="text-center bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto w-1/2"
+        onClick={() => handleDisplay(false)}
+      >
+        Hide
+      </div>
+      <div className="bg-purple-500 p-2 my-3">
+        <div className="grid grid-cols-2 my-2">
+          <text className="text-white">Size:</text>
+          <input
+            className="mx-2 p-1 py-0 text-center"
+            type="number"
+            value={state.scale}
+            onChange={(e) =>
+              setState({ ...state, scale: parseInt(e.target.value) })
+            }
+          />
+        </div>
+        <div
+          className="text-center bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          onClick={() => changeSize("sprite1")}
+        >
+          Scale By {state.scale}
+        </div>
+      </div>
+
+      {/* Control */}
+      <div className="font-bold"> {"Control"} </div>
+      <div className="bg-red-400 p-2 my-3">
+        <div className="grid grid-cols-2 my-2">
+          <text className="text-white">Wait:</text>
+          <input
+            className="mx-2 p-1 py-0 text-center"
+            type="number"
+            value={state.wait}
+            onChange={(e) =>
+              setState({ ...state, wait: parseInt(e.target.value) })
+            }
+          />
+        </div>
+        <div
+          className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          onClick={() => changeSize("sprite1")}
+        >
+          Wait {state.wait} seconds
+        </div>
+      </div>
+
+      <div className="bg-red-400 p-2 my-3">
+        <div className="grid grid-cols-2 my-2">
+          <text className="text-white">Repeat:</text>
+          <input
+            className="mx-2 p-1 py-0 text-center"
+            type="number"
+            value={state.repeat}
+            onChange={(e) =>
+              setState({ ...state, repeat: parseInt(e.target.value) })
+            }
+          />
+        </div>
+        <div
+          className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          onClick={() => changeSize("sprite1")}
+        >
+          Repeat By {state.repeat}
+        </div>
+      </div>
+      <div
+        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-1/2 mx-auto"
+        onClick={() => changeSize("sprite1")}
+      >
+        if
+      </div>
+
+      <div
+        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-1/2 mx-auto"
+        onClick={() => changeSize("sprite1")}
+      >
+        else
+      </div>
+
+      <div
+        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-1/2 mx-auto"
+        onClick={() => changeSize("sprite1")}
+      >
+        forever
+      </div>
+
+      <div
+        className="text-center bg-red-600 text-white px-2 py-1 my-2 text-sm cursor-pointer w-10/12 mx-auto"
+        onClick={() => changeSize("sprite1")}
+      >
+        when I start as a clone
+      </div>
+
     </div>
   );
 }
