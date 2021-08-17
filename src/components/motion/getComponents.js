@@ -1,5 +1,5 @@
 import React from "react";
-import Move from "../motion/components/move";
+import Move from "./components/move";
 import TurnAntiClockwise from "./components/turnAntiClockwise";
 import TurnClockwise from "./components/turnClockwise";
 
@@ -23,7 +23,7 @@ export const GotoPosition = (handleClick) => {
   return (
     <div className="bg-blue-500 p-2 my-3">
       <div className="grid grid-cols-2 my-2">
-        <text className="text-white"> X:</text>
+        <div className="text-white"> X:</div>
         <input
           className="mx-2 p-1 py-0 text-center"
           type="number"
@@ -35,7 +35,7 @@ export const GotoPosition = (handleClick) => {
         />
       </div>
       <div className="grid grid-cols-2 my-2">
-        <text className="text-white">Y:</text>
+        <div className="text-white">Y:</div>
         <input
           className="mx-2 p-1 py-0 text-center"
           type="number"

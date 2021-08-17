@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import Icon from "./Icon";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import Move from "../components/motion/components/move";
-import TurnAntiClockWise from "./motion/components/turnAntiClockwise";
-import TurnClockWise from "./motion/components/turnClockwise";
-import { getComponent } from "./motion/components";
+import { getComponent } from "./motion/getComponents";
 
 export default function Sidebar() {
   const [state, setState] = useState({
@@ -82,11 +79,15 @@ export default function Sidebar() {
     setState({ ...state, curr_size: state.curr_size + state.scale / 100.0 });
   };
 
+  const onDragEnd = (result) => {
+    console.log("Sidebar Result is ", result);
+  };
+
   return (
     <div className="w-60 flex-none h-full overflow-y-auto flex flex-col items-start p-2 border-r border-gray-200">
       {/* Events */}
       <div className="font-bold"> {"Events"} </div>
-      <DragDropContext>
+      {/* <DragDropContext>
         <Droppable droppableId="sidebar__events">
           {(provided) => (
             <ul
@@ -116,42 +117,40 @@ export default function Sidebar() {
             </ul>
           )}
         </Droppable>
-      </DragDropContext>
+      </DragDropContext> */}
 
       {/* Motion */}
       <div className="font-bold"> {"Motion"} </div>
-
-      <DragDropContext>
-        <Droppable droppableId="sidebar__motion">
-          {(provided) => (
-            <ul
-              className="sidebar__events"
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {state.motionComponents.map((x, i) => {
-                return (
-                  <Draggable
-                    key={`motionComp${i}`}
-                    draggableId={`motionComp${i}`}
-                    index={i}
-                  >
-                    {(provided) => (
-                      <li
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        {getComponent(x)}
-                      </li>
-                    )}
-                  </Draggable>
-                );
-              })}
-            </ul>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <Droppable droppableId="sideArea-motion" type="COMPONENTS">
+        {(provided) => (
+          <ul
+            className="sideArea-motion"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {state.motionComponents.map((x, i) => {
+              return (
+                <Draggable
+                  key={`${x}-sideArea`}
+                  draggableId={`${x}-sideArea`}
+                  index={i}
+                >
+                  {(provided) => (
+                    <li
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      {getComponent(x)}
+                    </li>
+                  )}
+                </Draggable>
+              );
+            })}
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
     </div>
   );
 }

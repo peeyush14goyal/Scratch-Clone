@@ -20,7 +20,7 @@ const TurnClockWise = ({ character, characterAngle }) => {
   return (
     <div className="bg-blue-500 p-2 my-3">
       <div className="grid grid-cols-2">
-        <text className="text-white">Rotate By:</text>
+        <div className="text-white">Rotate By:</div>
         <input
           className="mx-2 p-1 py-0 text-center"
           type="number"
