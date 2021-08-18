@@ -59,7 +59,7 @@ function MidArea({ area_list, add_list, event_values }) {
       let last_time = new Date().getTime();
       let curr_time = new Date().getTime();
 
-      while ((curr_time - last_time) / 1000 < event_values.wait[str2]) {
+      while ((curr_time - last_time) / 1000 < event_values.wait[str2] - 2) {
         curr_time = new Date().getTime();
       }
     }
@@ -84,7 +84,7 @@ function MidArea({ area_list, add_list, event_values }) {
         let last_time = new Date().getTime();
         let curr_time = new Date().getTime();
 
-        while ((curr_time - last_time) / 1000 < event_values.wait[str2]) {
+        while ((curr_time - last_time) / 1000 < event_values.wait[str2] - 2) {
           curr_time = new Date().getTime();
         }
         i++;
