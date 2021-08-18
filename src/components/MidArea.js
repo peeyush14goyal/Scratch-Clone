@@ -49,7 +49,7 @@ function MidArea({ area_list, add_list, event_values }) {
     if (arr.length === 0) return;
     let i = 0;
 
-    let repeat = 0;
+    let repeat = 1;
 
     let str1 = `comp${arr[i]}-${id}-${i}`;
 
