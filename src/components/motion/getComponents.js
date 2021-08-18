@@ -1,7 +1,15 @@
 import React from "react";
-import Move from "./components/move";
-import TurnAntiClockwise from "./components/turnAntiClockwise";
-import TurnClockwise from "./components/turnClockwise";
+import Move from "./components/Move";
+import TurnAntiClockwise from "./components/TurnAntiClockwise";
+import TurnClockwise from "./components/TurnClockwise";
+import GotoXY from "./components/Goto";
+import SayMessage from "./components/SayMessage";
+import SayMessageWithTimer from "./components/SayMessageWithTimer";
+import Size from "./components/Size";
+import Show from "./components/Show";
+import Hide from "./components/Hide";
+import Wait from "./components/Wait";
+import Repeat from "./components/Repeat";
 
 export const getComponent = (key, id) => {
   switch (key) {
@@ -14,44 +22,31 @@ export const getComponent = (key, id) => {
     case "TURN_ANTI_CLOCKWISE":
       return <TurnAntiClockwise comp_id={id} />;
 
+    case "GOTO_XY":
+      return <GotoXY comp_id={id} />;
+
+    case "SAY_MESSAGE":
+      return <SayMessage comp_id={id} />;
+
+    case "SAY_MESSAGE_WITH_TIMER":
+      return <SayMessageWithTimer comp_id={id} />;
+
+    case "SIZE":
+      return <Size comp_id={id} />;
+
+    case "SHOW":
+      return <Show comp_id={id} />;
+
+    case "HIDE":
+      return <Hide comp_id={id} />;
+
+    case "WAIT":
+      return <Wait comp_id={id} />;
+
+    case "REPEAT":
+      return <Repeat comp_id={id} />;
+
     default:
       return React.null;
   }
-};
-
-export const GotoPosition = (handleClick) => {
-  return (
-    <div className="bg-blue-500 p-2 my-3">
-      <div className="grid grid-cols-2 my-2">
-        <div className="text-white"> X:</div>
-        <input
-          className="mx-2 p-1 py-0 text-center"
-          type="number"
-          value={state.goto_x}
-          onChange={(e) => {
-            parseInt(e.target.value) != 0 &&
-              setState({ ...state, goto_x: parseInt(e.target.value) });
-          }}
-        />
-      </div>
-      <div className="grid grid-cols-2 my-2">
-        <div className="text-white">Y:</div>
-        <input
-          className="mx-2 p-1 py-0 text-center"
-          type="number"
-          value={state.goto_y}
-          onChange={(e) => {
-            parseInt(e.target.value) != 0 &&
-              setState({ ...state, goto_y: parseInt(e.target.value) });
-          }}
-        />
-      </div>
-      <div
-        className="text-center bg-blue-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
-        onClick={() => handleClick}
-      >
-        goto X: {state.goto_x} Y: {state.goto_y}
-      </div>
-    </div>
-  );
 };
