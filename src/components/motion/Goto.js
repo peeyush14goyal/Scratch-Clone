@@ -8,7 +8,7 @@ const GotoXY = ({ character, comp_id }) => {
   });
 
   const gotoXY = () => {
-    const el = document.getElementById(`${character.active}-div`);
+    const el = document.getElementById(character.active);
     el.style.position = "relative";
     el.style.left = state.goto_x + "px";
     el.style.top = state.goto_y + "px";
