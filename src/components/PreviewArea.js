@@ -110,7 +110,7 @@ function PreviewArea({ character, add_character, set_active }) {
         <div>
           <Button
             variant="contained"
-            color="primary"
+            color="secondary"
             className={classes.button}
             startIcon={<AddCircleIcon />}
             onClick={() => add_character()}

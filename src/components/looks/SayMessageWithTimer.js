@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import Paper from "@material-ui/core/Paper";
 
 const SayMessageWithTimer = ({ character, comp_id }) => {
   const [state, setState] = useState({
@@ -30,39 +31,41 @@ const SayMessageWithTimer = ({ character, comp_id }) => {
   };
 
   return (
-    <div className="bg-purple-500 p-2 my-3">
-      <div className="grid grid-cols-2 my-2">
-        <div className="text-white">Message</div>
-        <input
-          className="mx-2 p-1 py-0 text-center"
-          type="text"
-          value={state.timer_message}
-          onChange={(e) => {
-            e.target.value.length > 0 &&
-              setState({ ...state, timer_message: e.target.value });
-          }}
-        />
+    <Paper elevation={3}>
+      <div className="rounded text-center bg-purple-500 p-2 my-3">
+        <div className="grid grid-cols-2 my-2">
+          <div className="text-white">Message</div>
+          <input
+            className="mx-2 p-1 py-0 text-center"
+            type="text"
+            value={state.timer_message}
+            onChange={(e) => {
+              e.target.value.length > 0 &&
+                setState({ ...state, timer_message: e.target.value });
+            }}
+          />
+        </div>
+        <div className="grid grid-cols-2 my-2">
+          <div className="text-white">Timer:</div>
+          <input
+            className="mx-2 p-1 py-0 text-center"
+            type="number"
+            value={state.timer_for_msg}
+            onChange={(e) => {
+              parseInt(e.target.value) > 0 &&
+                setState({ ...state, timer_for_msg: parseInt(e.target.value) });
+            }}
+          />
+        </div>
+        <div
+          id={comp_id}
+          className="flex flex-row flex-wrap bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          onClick={() => displayMessage()}
+        >
+          {`Say ${state.timer_message}`}
+        </div>
       </div>
-      <div className="grid grid-cols-2 my-2">
-        <div className="text-white">Timer:</div>
-        <input
-          className="mx-2 p-1 py-0 text-center"
-          type="number"
-          value={state.timer_for_msg}
-          onChange={(e) => {
-            parseInt(e.target.value) > 0 &&
-              setState({ ...state, timer_for_msg: parseInt(e.target.value) });
-          }}
-        />
-      </div>
-      <div
-        id={comp_id}
-        className="flex flex-row flex-wrap bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
-        onClick={() => displayMessage()}
-      >
-        {`Say ${state.timer_message}`}
-      </div>
-    </div>
+    </Paper>
   );
 };
 

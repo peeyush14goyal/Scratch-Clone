@@ -15,7 +15,7 @@ export default function Sidebar() {
       <Droppable droppableId="sideArea-motion" type="COMPONENTS">
         {(provided) => (
           <ul
-            className="sideArea-motion"
+            className="sideArea-motion my-3"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
@@ -31,6 +31,7 @@ export default function Sidebar() {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
+                      className="my-2"
                     >
                       {getComponent(x)}
                     </li>
@@ -48,7 +49,7 @@ export default function Sidebar() {
       <Droppable droppableId="sideArea-looks" type="COMPONENTS">
         {(provided) => (
           <ul
-            className="sideArea-looks"
+            className="sideArea-looks my-3"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
@@ -64,6 +65,7 @@ export default function Sidebar() {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
+                      className="my-2"
                     >
                       {getComponent(x)}
                     </li>
@@ -81,7 +83,7 @@ export default function Sidebar() {
       <Droppable droppableId="sideArea-control" type="COMPONENTS">
         {(provided) => (
           <ul
-            className="sideArea-control"
+            className="sideArea-control my-3"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
@@ -97,6 +99,7 @@ export default function Sidebar() {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
+                      className="my-2"
                     >
                       {getComponent(x)}
                     </li>

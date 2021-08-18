@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Paper from "@material-ui/core/Paper";
 
 const HideMessage = ({ character, comp_id }) => {
   /* Display Message */
@@ -12,13 +13,15 @@ const HideMessage = ({ character, comp_id }) => {
   };
 
   return (
-    <div
-      id={comp_id}
-      onClick={() => displayMessage()}
-      className="bg-purple-700 text-center text-white max-w-content p-1 my-3"
-    >
-      Hide Message
-    </div>
+    <Paper elevation={3}>
+      <div
+        id={comp_id}
+        onClick={() => displayMessage()}
+        className="rounded bg-purple-700 text-center text-white max-w-content p-1 my-3"
+      >
+        Hide Message
+      </div>
+    </Paper>
   );
 };
 

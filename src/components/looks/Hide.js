@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Paper from "@material-ui/core/Paper";
 
 const Hide = ({ character, comp_id }) => {
   // To handle show and hide
@@ -8,13 +9,15 @@ const Hide = ({ character, comp_id }) => {
     el.style.display = "none";
   };
   return (
-    <div
-      id={comp_id}
-      className="text-center bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto w-1/2"
-      onClick={() => handleDisplay()}
-    >
-      Hide
-    </div>
+    <Paper elevation={3}>
+      <div
+        id={comp_id}
+        className="text-center rounded bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto"
+        onClick={() => handleDisplay()}
+      >
+        Hide
+      </div>
+    </Paper>
   );
 };
 

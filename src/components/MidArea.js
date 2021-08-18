@@ -3,8 +3,33 @@ import { connect } from "react-redux";
 import { addList } from "../redux/midarea/actions";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { getComponent } from "./getComponents";
+import { createStyles, makeStyles, withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import { purple } from "@material-ui/core/colors";
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    button: {
+      margin: 0,
+    },
+  })
+);
+
+const RunButton = withStyles((theme) => ({
+  root: {
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: purple[500],
+    fontSize: "13px",
+    "&:hover": {
+      backgroundColor: purple[700],
+    },
+  },
+}))(Button);
 
 function MidArea({ area_list, add_list, event_values }) {
+  const classes = useStyles();
   const eventFire = (el, etype) => {
     if (el && el.fireEvent) {
       el.fireEvent("on" + etype);
@@ -62,12 +87,18 @@ function MidArea({ area_list, add_list, event_values }) {
     <div className="flex-1 h-full overflow-auto p-3">
       <div className="flex justify-between">
         <div className="font-bold">Mid Area</div>
-        <button
-          className="p-2 bg-purple-500 text-white rounded m-2"
-          onClick={() => add_list()}
-        >
-          Add List
-        </button>
+
+        <div>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            startIcon={<AddIcon />}
+            onClick={() => add_list()}
+          >
+            Add List{" "}
+          </Button>
+        </div>
       </div>
       <div className="grid grid-flow-col">
         {area_list.midAreaLists.map((l) => {
@@ -84,14 +115,18 @@ function MidArea({ area_list, add_list, event_values }) {
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                     >
-                      <div className="w-20 mx-auto">
-                        <button
-                          className="p-1 px-3 text-white bg-green-600 mx-auto rounded"
+                      <div className="text-center mx-auto my-2 mb-4">
+                        <RunButton
+                          variant="contained"
+                          color="tertiary"
+                          className={classes.button}
+                          startIcon={<PlayArrowIcon />}
                           onClick={() => handleClick(l.comps, l.id)}
                         >
-                          Run
-                        </button>
+                          Run{" "}
+                        </RunButton>
                       </div>
+
                       {l.comps &&
                         l.comps.map((x, i) => {
                           let str = `${x}`;

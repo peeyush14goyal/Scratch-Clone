@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import Paper from "@material-ui/core/Paper";
 
 // Move Component for Sidebar
 const Move = ({ character, comp_id }) => {
@@ -16,20 +17,22 @@ const Move = ({ character, comp_id }) => {
   };
 
   return (
-    <div
-      id={comp_id}
-      className={` bg-blue-700 text-white px-2 py-1 my-2 text-sm cursor-pointer mx-auto`}
-      onClick={() => handleClick()}
-    >
-      Move{" "}
-      <input
-        type="number"
-        className="text-black text-center w-10 mx-2"
-        value={steps}
-        onChange={(e) => setSteps(parseInt(e.target.value))}
-      />{" "}
-      steps
-    </div>
+    <Paper elevation={3}>
+      <div
+        id={comp_id}
+        className={`text-center rounded bg-blue-700 text-white p-2 my-2 text-sm cursor-pointer mx-auto`}
+        onClick={() => handleClick()}
+      >
+        Move{" "}
+        <input
+          type="number"
+          className="text-black text-center w-10 mx-2"
+          value={steps}
+          onChange={(e) => setSteps(parseInt(e.target.value))}
+        />{" "}
+        steps
+      </div>
+    </Paper>
   );
 };
 
