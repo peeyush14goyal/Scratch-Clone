@@ -10,7 +10,6 @@ const Size = ({ character, comp_id }) => {
   const changeSize = () => {
     const el = document.getElementById(character.active);
     el.style.transform = `scale(${state.scale})`;
-    // setState({ ...state, curr_size: state.curr_size + state.scale });
   };
 
   return (
@@ -39,7 +38,7 @@ const Size = ({ character, comp_id }) => {
   );
 };
 
-// mapping state to props
+// mapping state to component
 const mapStateToProps = (state) => {
   return {
     character: state.character,

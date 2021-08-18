@@ -16,6 +16,7 @@ import BroadcastMessage from "./events/broadcast";
 import Think from "./looks/Think";
 import ThinkWithTimer from "./looks/ThinkWithTimer";
 
+// fetch components based on different keys
 export const getComponent = (key, id) => {
   switch (key) {
     case "MOVE_Y":

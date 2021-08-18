@@ -8,6 +8,7 @@ const GotoXY = ({ character, comp_id }) => {
     goto_y: 0,
   });
 
+  // go to posiiton X and Y
   const gotoXY = () => {
     const el = document.getElementById(`${character.active}-div`);
     el.style.position = "relative";
@@ -53,7 +54,7 @@ const GotoXY = ({ character, comp_id }) => {
   );
 };
 
-// mapping state to props
+// mapping state to component
 const mapStateToProps = (state) => {
   return {
     character: state.character,

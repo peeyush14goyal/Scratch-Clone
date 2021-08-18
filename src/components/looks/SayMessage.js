@@ -45,7 +45,7 @@ const SayMessage = ({ character, comp_id }) => {
         </div>
         <div
           id={comp_id}
-          className="flex flex-row flex-wrap bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          className="flex text-center flex-row flex-wrap bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
           onClick={() => displayMessage()}
         >
           {`Say ${state.message}`}
@@ -55,7 +55,7 @@ const SayMessage = ({ character, comp_id }) => {
   );
 };
 
-// mapping state to props
+// mapping state to component
 const mapStateToProps = (state) => {
   return {
     character: state.character,

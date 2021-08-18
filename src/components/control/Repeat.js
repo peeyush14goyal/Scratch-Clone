@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 const Repeat = ({ comp_id, events, set_repeat }) => {
   const [repeat, setStateRepeat] = useState(0);
 
+  // Set Repeat value for current component
   function handleChange(e) {
     let val = parseInt(e.target.value);
     setStateRepeat(val);
@@ -14,6 +15,7 @@ const Repeat = ({ comp_id, events, set_repeat }) => {
     set_repeat(curr);
   }
   return (
+    // Repeat Component
     <Paper elevation={3}>
       <div className="rounded text-center bg-red-400 p-2 my-3">
         <div className="grid grid-cols-2 my-2">
@@ -38,12 +40,14 @@ const Repeat = ({ comp_id, events, set_repeat }) => {
   );
 };
 
+// map state to component
 const mapStateToProps = (state) => {
   return {
     events: state.event,
   };
 };
 
+// map function to component
 const mapDispatchToProps = (dispatch) => {
   return {
     set_repeat: (value) => dispatch(setRepeat(value)),

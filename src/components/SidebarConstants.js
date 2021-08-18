@@ -1,3 +1,4 @@
+// Components List
 export const motionComponents = [
   "MOVE",
   "MOVE_Y",

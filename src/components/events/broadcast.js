@@ -7,7 +7,8 @@ const BroadcastMessage = ({ comp_id }) => {
   const [state, setState] = useState({
     message: "",
   });
-  /* Display Message */
+
+  /* Display Snackbar */
   const handleClick = () => {
     enqueueSnackbar(state.message, { variant: "info" });
   };

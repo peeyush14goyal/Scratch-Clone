@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 
 const HideMessage = ({ character, comp_id }) => {
-  /* Display Message */
+  /* Hide Message */
   const displayMessage = () => {
     window.clearTimeout();
     const el = document.getElementById(`${character.active}-message-box`);

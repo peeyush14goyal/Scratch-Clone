@@ -8,7 +8,7 @@ const ThinkWithTimer = ({ character, comp_id }) => {
     timer_message: "",
     timer_for_msg: 0,
   });
-  /* Display Message */
+  /* Display Think Message with Timer */
   const displayMessage = () => {
     const el = document.getElementById(`${character.active}-message-box`);
     const el2 = document.getElementById(`${character.active}-message-box1`);
@@ -62,7 +62,7 @@ const ThinkWithTimer = ({ character, comp_id }) => {
         </div>
         <div
           id={comp_id}
-          className="flex flex-row flex-wrap bg-purple-900 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          className="flex flex-row flex-wrap text-center bg-purple-900 text-white px-2 py-1 my-2 text-sm cursor-pointer"
           onClick={() => displayMessage()}
         >
           {`Think ${state.timer_message}`}
@@ -72,7 +72,7 @@ const ThinkWithTimer = ({ character, comp_id }) => {
   );
 };
 
-// mapping state to props
+// mapping state to component
 const mapStateToProps = (state) => {
   return {
     character: state.character,

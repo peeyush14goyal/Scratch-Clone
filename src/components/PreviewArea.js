@@ -10,6 +10,7 @@ import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
+// Styling for MaterialUI Components
 const useStyles = makeStyles((theme) =>
   createStyles({
     formControl: {
@@ -68,6 +69,7 @@ function PreviewArea({ character, add_character, set_active }) {
     document.onmousemove = null;
   }
 
+  // handle changing active character
   const handleChange = (e) => {
     setActive(e.target.value);
     set_active(e.target.value);
@@ -155,6 +157,7 @@ const mapStateToProps = (state) => {
   };
 };
 
+// mapping functions to components
 const mapDispatchToProps = (dispatch) => {
   return {
     add_character: () => dispatch(addCharacter()),

@@ -10,7 +10,7 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import { purple } from "@material-ui/core/colors";
 import Paper from "@material-ui/core/Paper";
 
-
+// Styling for MaterialUI Components
 const useStyles = makeStyles(() =>
   createStyles({
     button: {
@@ -19,6 +19,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
+// Customized button for Running Lists
 const RunButton = withStyles((theme) => ({
   root: {
     color: theme.palette.getContrastText(purple[500]),
@@ -30,6 +31,7 @@ const RunButton = withStyles((theme) => ({
   },
 }))(Button);
 
+// Mid Area Component
 function MidArea({ area_list, add_list, event_values }) {
   const classes = useStyles();
   const eventFire = (el, etype) => {
@@ -42,6 +44,7 @@ function MidArea({ area_list, add_list, event_values }) {
     }
   };
 
+  // Handle Running the list
   const handleClick = (arr, id) => {
     if (arr.length === 0) return;
     let i = 0;
@@ -49,18 +52,33 @@ function MidArea({ area_list, add_list, event_values }) {
     let repeat = 0;
 
     let str1 = `comp${arr[i]}-${id}-${i}`;
-    if (arr[i] != "REPEAT") {
+
+    // Handle Wait at first index
+    if (arr[i] == "WAIT") {
+      let str2 = `comp${arr[i]}-${id}-${i}`;
+      let last_time = new Date().getTime();
+      let curr_time = new Date().getTime();
+
+      while ((curr_time - last_time) / 1000 < event_values.wait[str2]) {
+        curr_time = new Date().getTime();
+      }
+    }
+
+    // Handle Repeat at first index
+    else if (arr[i] != "REPEAT") {
       eventFire(document.getElementById(str1), "click");
     } else {
       repeat = event_values.repeat[str1] + 1;
     }
     i++;
 
+    /* Each function execution takes 2 seconds */
     var cnt = setInterval(() => {
       if (i == arr.length) {
         clearInterval(cnt);
       }
 
+      // Handle Wait
       if (arr[i] == "WAIT") {
         let str2 = `comp${arr[i]}-${id}-${i}`;
         let last_time = new Date().getTime();
@@ -70,11 +88,15 @@ function MidArea({ area_list, add_list, event_values }) {
           curr_time = new Date().getTime();
         }
         i++;
-      } else if (arr[i] == "REPEAT") {
+      }
+      // Handle Repeat Component at current index
+      else if (arr[i] == "REPEAT") {
         let str2 = `comp${arr[i]}-${id}-${i}`;
         repeat = repeat * (event_values.repeat[str2] + 1);
         i++;
-      } else if (arr[i - 1] == "REPEAT" && repeat > 1) {
+      }
+      // If Repeat component is at previous index
+      else if (arr[i - 1] == "REPEAT" && repeat > 1) {
         let str2 = `comp${arr[i]}-${id}-${i}`;
         eventFire(document.getElementById(str2), "click");
         repeat--;

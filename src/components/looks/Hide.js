@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 
 const Hide = ({ character, comp_id }) => {
-  // To handle show and hide
+  // To handle hide component
   const handleDisplay = () => {
     const el = document.getElementById(character.active);
     el.style.display = "none";

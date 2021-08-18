@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 const Move = ({ character, comp_id }) => {
   const [steps, setSteps] = useState(0);
 
-  // Fucntion used for moiving Sprint
+  // Function used for moiving Sprint
   const handleClick = () => {
     const el = document.getElementById(`${character.active}-div`);
 
@@ -35,7 +35,7 @@ const Move = ({ character, comp_id }) => {
   );
 };
 
-// mapping state to props
+// mapping state to component
 const mapStateToProps = (state) => {
   return {
     character: state.character,
