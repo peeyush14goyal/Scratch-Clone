@@ -12,6 +12,7 @@ import Wait from "./control/Wait";
 import Repeat from "./control/Repeat";
 import HideMessage from "./looks/HideMessage";
 import MoveY from "./motion/MoveY";
+import BroadcastMessage from "./events/broadcast";
 
 export const getComponent = (key, id) => {
   switch (key) {
@@ -43,6 +44,9 @@ export const getComponent = (key, id) => {
 
     case "HIDE":
       return <Hide comp_id={id} />;
+
+    case "BROADCAST":
+      return <BroadcastMessage comp_id={id} />;
 
     case "WAIT":
       return <Wait comp_id={id} />;

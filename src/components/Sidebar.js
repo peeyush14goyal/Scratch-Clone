@@ -5,6 +5,7 @@ import {
   motionComponents,
   looksComponents,
   controlComponents,
+  eventsComponents,
 } from "./SidebarConstants";
 
 export default function Sidebar() {
@@ -88,6 +89,40 @@ export default function Sidebar() {
             ref={provided.innerRef}
           >
             {controlComponents.map((x, i) => {
+              return (
+                <Draggable
+                  key={`${x}-sideArea`}
+                  draggableId={`${x}-sideArea`}
+                  index={i}
+                >
+                  {(provided) => (
+                    <li
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      className="my-2"
+                    >
+                      {getComponent(x)}
+                    </li>
+                  )}
+                </Draggable>
+              );
+            })}
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
+
+      {/* Events */}
+      <div className="font-bold"> {"Motion"} </div>
+      <Droppable droppableId="sideArea-motion" type="COMPONENTS">
+        {(provided) => (
+          <ul
+            className="sideArea-motion my-3"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {eventsComponents.map((x, i) => {
               return (
                 <Draggable
                   key={`${x}-sideArea`}

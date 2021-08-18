@@ -5,12 +5,14 @@ import "tailwindcss/tailwind.css";
 import { Provider } from "react-redux";
 import store from "./store";
 import "./index.css";
-import "regenerator-runtime/runtime";
+import { SnackbarProvider } from "notistack";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <SnackbarProvider maxSnack={4}>
+        <App />
+      </SnackbarProvider>
     </Provider>
   </React.StrictMode>,
 
