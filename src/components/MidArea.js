@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import { purple } from "@material-ui/core/colors";
+import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -103,59 +104,59 @@ function MidArea({ area_list, add_list, event_values }) {
       <div className="grid grid-flow-col">
         {area_list.midAreaLists.map((l) => {
           return (
-            <div
-              key={l.id}
-              className="w-52 border border-2 border-black m-4 p-1"
-            >
-              <Droppable droppableId={l.id} type="COMPONENTS">
-                {(provided) => {
-                  return (
-                    <ul
-                      className={`${l.id} w-48 h-full`}
-                      {...provided.droppableProps}
-                      ref={provided.innerRef}
-                    >
-                      <div className="text-center mx-auto my-2 mb-4">
-                        <RunButton
-                          variant="contained"
-                          color="tertiary"
-                          className={classes.button}
-                          startIcon={<PlayArrowIcon />}
-                          onClick={() => handleClick(l.comps, l.id)}
+            <div className="w-60" key={l.id}>
+              <Paper elevation={3} className="p-4">
+                <div className="w-52 border border-2 border-gray-300 p-2">
+                  <Droppable droppableId={l.id} type="COMPONENTS">
+                    {(provided) => {
+                      return (
+                        <ul
+                          className={`${l.id} w-48 h-full`}
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
                         >
-                          Run{" "}
-                        </RunButton>
-                      </div>
-
-                      {l.comps &&
-                        l.comps.map((x, i) => {
-                          let str = `${x}`;
-                          let component_id = `comp${str}-${l.id}-${i}`;
-
-                          return (
-                            <Draggable
-                              key={`${str}-${l.id}-${i}`}
-                              draggableId={`${str}-${l.id}-${i}`}
-                              index={i}
+                          <div className="text-center mx-auto my-2 mb-4">
+                            <RunButton
+                              variant="contained"
+                              className={classes.button}
+                              startIcon={<PlayArrowIcon />}
+                              onClick={() => handleClick(l.comps, l.id)}
                             >
-                              {(provided) => (
-                                <li
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
+                              Run{" "}
+                            </RunButton>
+                          </div>
+
+                          {l.comps &&
+                            l.comps.map((x, i) => {
+                              let str = `${x}`;
+                              let component_id = `comp${str}-${l.id}-${i}`;
+
+                              return (
+                                <Draggable
+                                  key={`${str}-${l.id}-${i}`}
+                                  draggableId={`${str}-${l.id}-${i}`}
+                                  index={i}
                                 >
-                                  {getComponent(str, component_id)}
-                                  {provided.placeholder}
-                                </li>
-                              )}
-                            </Draggable>
-                          );
-                        })}
-                      {provided.placeholder}
-                    </ul>
-                  );
-                }}
-              </Droppable>
+                                  {(provided) => (
+                                    <li
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                    >
+                                      {getComponent(str, component_id)}
+                                      {provided.placeholder}
+                                    </li>
+                                  )}
+                                </Draggable>
+                              );
+                            })}
+                          {provided.placeholder}
+                        </ul>
+                      );
+                    }}
+                  </Droppable>
+                </div>
+              </Paper>
             </div>
           );
         })}

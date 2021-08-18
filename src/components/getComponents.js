@@ -11,9 +11,12 @@ import Hide from "./looks/Hide";
 import Wait from "./control/Wait";
 import Repeat from "./control/Repeat";
 import HideMessage from "./looks/HideMessage";
+import MoveY from "./motion/MoveY";
 
 export const getComponent = (key, id) => {
   switch (key) {
+    case "MOVE_Y":
+      return <MoveY comp_id={id} />;
     case "MOVE":
       return <Move comp_id={id} />;
 
