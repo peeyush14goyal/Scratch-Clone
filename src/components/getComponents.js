@@ -1,15 +1,15 @@
 import React from "react";
-import Move from "./components/Move";
-import TurnAntiClockwise from "./components/TurnAntiClockwise";
-import TurnClockwise from "./components/TurnClockwise";
-import GotoXY from "./components/Goto";
-import SayMessage from "./components/SayMessage";
-import SayMessageWithTimer from "./components/SayMessageWithTimer";
-import Size from "./components/Size";
-import Show from "./components/Show";
-import Hide from "./components/Hide";
-import Wait from "./components/Wait";
-import Repeat from "./components/Repeat";
+import Move from "./motion/Move";
+import TurnAntiClockwise from "./motion/TurnAntiClockwise";
+import TurnClockwise from "./motion/TurnClockwise";
+import GotoXY from "./motion/Goto";
+import SayMessage from "./looks/SayMessage";
+import SayMessageWithTimer from "./looks/SayMessageWithTimer";
+import Size from "./looks/Size";
+import Show from "./looks/Show";
+import Hide from "./looks/Hide";
+import Wait from "./control/Wait";
+import Repeat from "./control/Repeat";
 
 export const getComponent = (key, id) => {
   switch (key) {

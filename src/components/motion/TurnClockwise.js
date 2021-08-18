@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { setCharacterAngle } from "../../../redux/character/actions";
-import Icon from "../../Icon";
+import { setCharacterAngle } from "../../redux/character/actions";
+import Icon from "../Icon";
 
 const TurnClockWise = ({ character, characterAngle, comp_id }) => {
   const [angle, setAngle] = useState(0);

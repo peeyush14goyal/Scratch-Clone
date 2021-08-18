@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { addList } from "../redux/midarea/actions";
 import { Droppable, Draggable } from "react-beautiful-dnd";
-import { getComponent } from "./motion/getComponents";
+import { getComponent } from "./getComponents";
 
 function MidArea({ area_list, add_list }) {
   const eventFire = (el, etype) => {

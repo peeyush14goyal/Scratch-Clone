@@ -1,6 +1,6 @@
 import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
-import { getComponent } from "./motion/getComponents";
+import { getComponent } from "./getComponents";
 import {
   motionComponents,
   looksComponents,
