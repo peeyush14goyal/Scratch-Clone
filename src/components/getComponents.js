@@ -13,6 +13,8 @@ import Repeat from "./control/Repeat";
 import HideMessage from "./looks/HideMessage";
 import MoveY from "./motion/MoveY";
 import BroadcastMessage from "./events/broadcast";
+import Think from "./looks/Think";
+import ThinkWithTimer from "./looks/ThinkWithTimer";
 
 export const getComponent = (key, id) => {
   switch (key) {
@@ -56,6 +58,12 @@ export const getComponent = (key, id) => {
 
     case "HIDE_MESSAGE":
       return <HideMessage comp_id={id} />;
+
+    case "THINK":
+      return <Think comp_id={id} />;
+
+    case "THINK_TIMER":
+      return <ThinkWithTimer comp_id={id} />;
 
     default:
       return React.null;

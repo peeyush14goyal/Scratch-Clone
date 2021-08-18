@@ -2,40 +2,40 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 
-const SayMessageWithTimer = ({ character, comp_id }) => {
+const ThinkWithTimer = ({ character, comp_id }) => {
   const [state, setState] = useState({
     show_msg: false,
     timer_message: "",
     timer_for_msg: 0,
   });
-
   /* Display Message */
   const displayMessage = () => {
     const el = document.getElementById(`${character.active}-message-box`);
     const el2 = document.getElementById(`${character.active}-message-box1`);
-    el2.style.display = "none";
-    if (state.show_msg) {
+    if (state.show_msg && state.character_id === character.active) {
       setState({ ...state, show_msg: false });
       el.style.display = "none";
+      el2.style.display = "none";
       return;
     }
     setState({ ...state, show_msg: true });
-
     el.style.display = "inline-block";
     el.style.position = "relative";
-    el.style.top = state.curr_y - 15 + "px";
-    el.style.left = state.curr_x + 40 + "px";
+
+    el2.style.display = "block";
+    el2.style.position = "relative";
 
     el.innerHTML = state.timer_message;
     window.setTimeout(() => {
       setState({ ...state, show_msg: false });
       el.style.display = "none";
+      el2.style.display = "none";
     }, state.timer_for_msg * 1000);
   };
 
   return (
     <Paper elevation={3}>
-      <div className="rounded text-center bg-purple-500 p-2 my-3">
+      <div className="rounded text-center bg-purple-700 p-2 my-3">
         <div className="grid grid-cols-2 my-2">
           <div className="text-white">Message</div>
           <input
@@ -62,10 +62,10 @@ const SayMessageWithTimer = ({ character, comp_id }) => {
         </div>
         <div
           id={comp_id}
-          className="flex flex-row flex-wrap bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          className="flex flex-row flex-wrap bg-purple-900 text-white px-2 py-1 my-2 text-sm cursor-pointer"
           onClick={() => displayMessage()}
         >
-          {`Say ${state.timer_message}`}
+          {`Think ${state.timer_message}`}
         </div>
       </div>
     </Paper>
@@ -79,4 +79,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(SayMessageWithTimer);
+export default connect(mapStateToProps)(ThinkWithTimer);

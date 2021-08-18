@@ -114,7 +114,7 @@ export default function Sidebar() {
       </Droppable>
 
       {/* Events */}
-      <div className="font-bold"> {"Motion"} </div>
+      <div className="font-bold"> {"Events"} </div>
       <Droppable droppableId="sideArea-motion" type="COMPONENTS">
         {(provided) => (
           <ul

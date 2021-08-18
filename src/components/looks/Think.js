@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 
-const SayMessage = ({ character, comp_id }) => {
+const ThinkMessage = ({ character, comp_id }) => {
   const [state, setState] = useState({
     show_msg: false,
     message: "",
@@ -12,17 +12,18 @@ const SayMessage = ({ character, comp_id }) => {
   const displayMessage = () => {
     const el = document.getElementById(`${character.active}-message-box`);
     const el2 = document.getElementById(`${character.active}-message-box1`);
-
     if (state.show_msg && state.character_id === character.active) {
       setState({ ...state, show_msg: false });
       el.style.display = "none";
+      el2.style.display = "none";
       return;
     }
     setState({ ...state, show_msg: true });
     el.style.display = "block";
     el.style.position = "relative";
 
-    el2.style.display = "none";
+    el2.style.display = "block";
+    el2.style.position = "relative";
 
     window.clearTimeout();
     el.innerHTML = state.message;
@@ -30,7 +31,7 @@ const SayMessage = ({ character, comp_id }) => {
 
   return (
     <Paper elevation={3}>
-      <div className="rounded text-center bg-purple-500 p-2 my-3">
+      <div className="rounded text-center bg-purple-700 p-2 my-3">
         <div className="grid grid-cols-2 my-2">
           <div className="text-white">Message</div>
           <input
@@ -45,10 +46,10 @@ const SayMessage = ({ character, comp_id }) => {
         </div>
         <div
           id={comp_id}
-          className="flex flex-row flex-wrap bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
+          className="flex flex-row flex-wrap bg-purple-900 text-white px-2 py-1 my-2 text-sm cursor-pointer"
           onClick={() => displayMessage()}
         >
-          {`Say ${state.message}`}
+          {`Think ${state.message}`}
         </div>
       </div>
     </Paper>
@@ -62,4 +63,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(SayMessage);
+export default connect(mapStateToProps)(ThinkMessage);
