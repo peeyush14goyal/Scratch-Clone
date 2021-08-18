@@ -4,14 +4,13 @@ import Paper from "@material-ui/core/Paper";
 
 const Size = ({ character, comp_id }) => {
   const [state, setState] = useState({
-    curr_size: 0,
     scale: 1,
   });
   // To change Size of Sprint
   const changeSize = () => {
     const el = document.getElementById(character.active);
-    el.style.transform = `scale(${state.curr_size + state.scale})`;
-    setState({ ...state, curr_size: state.curr_size + state.scale });
+    el.style.transform = `scale(${state.scale})`;
+    // setState({ ...state, curr_size: state.curr_size + state.scale });
   };
 
   return (
@@ -33,7 +32,7 @@ const Size = ({ character, comp_id }) => {
           className="text-center bg-purple-700 text-white px-2 py-1 my-2 text-sm cursor-pointer"
           onClick={() => changeSize()}
         >
-          Scale By {state.scale}
+          Size {state.scale}
         </div>
       </div>
     </Paper>
