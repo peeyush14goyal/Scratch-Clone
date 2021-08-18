@@ -5,12 +5,13 @@ const SayMessage = ({ character, comp_id }) => {
   const [state, setState] = useState({
     show_msg: false,
     message: "",
+    character_id: "",
   });
   /* Display Message */
   const displayMessage = () => {
     const el = document.getElementById(`${character.active}-message-box`);
     const el2 = document.getElementById(`${character.active}-message-box1`);
-    if (state.show_msg) {
+    if (state.show_msg && state.character_id === character.active) {
       setState({ ...state, show_msg: false });
       el.style.display = "none";
       el2.style.display = "none";

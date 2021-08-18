@@ -10,6 +10,7 @@ import Show from "./looks/Show";
 import Hide from "./looks/Hide";
 import Wait from "./control/Wait";
 import Repeat from "./control/Repeat";
+import HideMessage from "./looks/HideMessage";
 
 export const getComponent = (key, id) => {
   switch (key) {
@@ -45,6 +46,9 @@ export const getComponent = (key, id) => {
 
     case "REPEAT":
       return <Repeat comp_id={id} />;
+
+    case "HIDE_MESSAGE":
+      return <HideMessage comp_id={id} />;
 
     default:
       return React.null;
