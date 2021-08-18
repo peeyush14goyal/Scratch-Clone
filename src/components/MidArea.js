@@ -34,7 +34,16 @@ function MidArea({ area_list, add_list, event_values }) {
         clearInterval(cnt);
       }
 
-      if (arr[i] == "REPEAT") {
+      if (arr[i] == "WAIT") {
+        let str2 = `comp${arr[i]}-${id}-${i}`;
+        let last_time = new Date().getTime();
+        let curr_time = new Date().getTime();
+
+        while ((curr_time - last_time) / 1000 < event_values.wait[str2]) {
+          curr_time = new Date().getTime();
+        }
+        i++;
+      } else if (arr[i] == "REPEAT") {
         let str2 = `comp${arr[i]}-${id}-${i}`;
         repeat = repeat * (event_values.repeat[str2] + 1);
         i++;
@@ -42,10 +51,6 @@ function MidArea({ area_list, add_list, event_values }) {
         let str2 = `comp${arr[i]}-${id}-${i}`;
         eventFire(document.getElementById(str2), "click");
         repeat--;
-      } else if (arr[i] == "REPEAT") {
-        let str2 = `comp${arr[i]}-${id}-${i}`;
-        repeat = event_values.repeat[str2];
-        i++;
       } else {
         let str2 = `comp${arr[i]}-${id}-${i}`;
         eventFire(document.getElementById(str2), "click");

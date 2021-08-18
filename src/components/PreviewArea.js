@@ -72,8 +72,12 @@ function PreviewArea({ character, add_character, set_active }) {
           return (
             <div id={`dragme-${i}`} key={i}>
               <div
-                className="hidden border-2 p-2 w-auto whitespace-nowrap"
-                id="message-box"
+                className="hidden border-2 p-2 ml-3 mb-2 w-auto whitespace-nowrap"
+                id={x.id + "-message-box"}
+              ></div>
+              <div
+                className="hidden border-2 w-4 left-1/2 h-4 ml-3 mb-2 whitespace-nowrap"
+                id={x.id + "-message-box1"}
               ></div>
               <div>
                 <CatSprite charac_id={x.id} />

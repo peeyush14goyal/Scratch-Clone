@@ -9,16 +9,19 @@ const SayMessage = ({ character, comp_id }) => {
   /* Display Message */
   const displayMessage = () => {
     const el = document.getElementById(`${character.active}-message-box`);
+    const el2 = document.getElementById(`${character.active}-message-box1`);
     if (state.show_msg) {
       setState({ ...state, show_msg: false });
       el.style.display = "none";
+      el2.style.display = "none";
       return;
     }
     setState({ ...state, show_msg: true });
     el.style.display = "inline-block";
     el.style.position = "relative";
-    el.style.top = state.curr_y - 15 + "px";
-    el.style.left = state.curr_x + 40 + "px";
+
+    el2.style.display = "block";
+    el2.style.position = "relative";
 
     window.clearTimeout();
     el.innerHTML = state.message;
