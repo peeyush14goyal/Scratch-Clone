@@ -129,7 +129,7 @@ function PreviewArea({ character, add_character, set_active }) {
               className={`absolute left-${val} top-${val}`}
               onMouseDown={(e) => dragMouseDown(e, `${x.id}-${i}`)}
             >
-              <div id={`${x.id}-div`}>
+              <div id={`${x.id}-div`} className="character">
                 <div
                   className="hidden border-2 p-2 ml-3 mb-2 w-auto whitespace-nowrap"
                   id={x.id + "-message-box"}

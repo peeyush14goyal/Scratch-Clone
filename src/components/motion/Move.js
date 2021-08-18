@@ -8,10 +8,10 @@ const Move = ({ character, comp_id }) => {
 
   // Fucntion used for moiving Sprint
   const handleClick = () => {
-    const el = document.getElementById(character.active);
+    const el = document.getElementById(`${character.active}-div`);
 
     var left = el.offsetLeft;
-    el.style.position = "absolute";
+    el.style.position = "relative";
     el.style.left = left + steps + "px";
   };
 
