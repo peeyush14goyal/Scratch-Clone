@@ -16,7 +16,7 @@ export const characterReducer = (state = initialState, action) => {
     case ADD_CHARACTER:
       let charactersArray = state.characters;
       charactersArray.push({
-        id: `sprite${state.characters.length() + 1}`,
+        id: `sprite${state.characters.length + 1}`,
         angle: 0,
       });
 

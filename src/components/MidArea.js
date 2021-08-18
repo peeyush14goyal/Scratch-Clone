@@ -4,9 +4,9 @@ import { addList } from "../redux/midarea/actions";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { getComponent } from "./getComponents";
 
-function MidArea({ area_list, add_list }) {
+function MidArea({ area_list, add_list, event_values }) {
   const eventFire = (el, etype) => {
-    if (el.fireEvent) {
+    if (el && el.fireEvent) {
       el.fireEvent("on" + etype);
     } else {
       var evObj = document.createEvent("Events");
@@ -16,12 +16,17 @@ function MidArea({ area_list, add_list }) {
   };
 
   const handleClick = (arr, id) => {
-    console.log("X is ", arr);
     if (arr.length === 0) return;
     let i = 0;
 
+    let repeat = 0;
+
     let str1 = `comp${arr[i]}-${id}-${i}`;
-    eventFire(document.getElementById(str1), "click");
+    if (arr[i] != "REPEAT") {
+      eventFire(document.getElementById(str1), "click");
+    } else {
+      repeat = event_values.repeat[str1] + 1;
+    }
     i++;
 
     var cnt = setInterval(() => {
@@ -29,21 +34,36 @@ function MidArea({ area_list, add_list }) {
         clearInterval(cnt);
       }
 
-      let str2 = `comp${arr[i]}-${id}-${i}`;
-      eventFire(document.getElementById(str2), "click");
-      i++;
-
-      console.log("Time Ran Out");
+      if (arr[i] == "REPEAT") {
+        let str2 = `comp${arr[i]}-${id}-${i}`;
+        repeat = repeat * (event_values.repeat[str2] + 1);
+        i++;
+      } else if (arr[i - 1] == "REPEAT" && repeat > 1) {
+        let str2 = `comp${arr[i]}-${id}-${i}`;
+        eventFire(document.getElementById(str2), "click");
+        repeat--;
+      } else if (arr[i] == "REPEAT") {
+        let str2 = `comp${arr[i]}-${id}-${i}`;
+        repeat = event_values.repeat[str2];
+        i++;
+      } else {
+        let str2 = `comp${arr[i]}-${id}-${i}`;
+        eventFire(document.getElementById(str2), "click");
+        i++;
+      }
     }, 2000);
   };
   return (
-    <div className="flex-1 h-full overflow-auto">
-      <button
-        className="p-2 bg-purple-500 text-white rounded m-2"
-        onClick={() => add_list()}
-      >
-        Add List
-      </button>
+    <div className="flex-1 h-full overflow-auto p-3">
+      <div className="flex justify-between">
+        <div className="font-bold">Mid Area</div>
+        <button
+          className="p-2 bg-purple-500 text-white rounded m-2"
+          onClick={() => add_list()}
+        >
+          Add List
+        </button>
+      </div>
       <div className="grid grid-flow-col">
         {area_list.midAreaLists.map((l) => {
           return (
@@ -108,6 +128,7 @@ function MidArea({ area_list, add_list }) {
 const mapStateToProps = (state) => {
   return {
     area_list: state.list,
+    event_values: state.event,
   };
 };
 

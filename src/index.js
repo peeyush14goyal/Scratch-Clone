@@ -5,6 +5,7 @@ import "tailwindcss/tailwind.css";
 import { Provider } from "react-redux";
 import store from "./store";
 import "./index.css";
+import "regenerator-runtime/runtime";
 
 ReactDOM.render(
   <React.StrictMode>

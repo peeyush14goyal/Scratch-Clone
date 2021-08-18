@@ -16,7 +16,6 @@ export const listReducer = (state = initialState, action) => {
       let all_lists = state.midAreaLists;
       let [item] = all_lists.splice(index, 1);
       item.comps = action.list;
-      console.log("List is ", action.list);
       all_lists.splice(index, 0, item);
 
       return {

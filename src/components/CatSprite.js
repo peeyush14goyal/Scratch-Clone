@@ -2,7 +2,6 @@ import React from "react";
 import "./CatSprite.css";
 
 export default function CatSprite({ charac_id }) {
-  console.log("id is ", charac_id);
   return (
     <div id={charac_id} className="character inline-block z-0">
       <svg
